@@ -346,6 +346,8 @@ def query_configurations(
         ignore_vm: ignores the variability model (if no constraints are used)
     '''
 
+    solver = z3.Solver()
+
     # Parse variability model in DIMACS format and add constraints
     if not ignore_vm:
         dimacs = list()
@@ -390,7 +392,7 @@ def query_configurations(
     while len(solution_vectors) < max_solutions and iterations_count < 1000:
         #print("query")
 
-        solver = z3.Solver()
+
         target = z3.BitVec('target', n_options)
 
         for sol_vector in solution_vectors:
